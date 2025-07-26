@@ -92,7 +92,7 @@ namespace Leblebi
             OtherESP                = GUI.Toggle(new Rect(10, 230, 200, 20), OtherESP, "Other ESP");
             CheckZmVisibility       = GUI.Toggle(new Rect(10, 250, 200, 20), CheckZmVisibility, "Check zombie visibility");
 
-            if (GUI.Button(new Rect(10, 250, 100, 20), "Reload Objs"))
+            if (GUI.Button(new Rect(10, 270, 100, 20), "Reload Objects"))
             {
                 LoadBasics();
             }
@@ -104,7 +104,7 @@ namespace Leblebi
             {
                 Inventory vLPInventory = v_LocalPlayer.inventory;
 
-                GUI.Label(new Rect(10, 270, 200, 20), "Rotation: " + v_LocalPlayer.rotation.ToString());
+                GUI.Label(new Rect(10, 290, 200, 20), "Rotation: " + v_LocalPlayer.rotation.ToString());
 
                 if (vLPInventory != null)
                 {
@@ -149,6 +149,7 @@ namespace Leblebi
                     if (InstantItemSwitch)
                         vLPInventory.isSwitchingHeldItem = false;
 
+
                     if (Triggerbot)
                     {
                         var ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -168,14 +169,13 @@ namespace Leblebi
                                     }
                                 }
 
-                                GUI.Label(new Rect(10, 290 + k * 20, 100, 20), "HIT: " + transform.name);
+                                GUI.Label(new Rect(10, 310 + k * 20, 100, 20), "HIT: " + transform.name);
                                 transform = transform.parent;
                                 k++;
                             }
                         }
                     }
                 }
-
 
                 for (int i = 0; i < v_GameManager.World.Entities.list.Count; i++)
                 {
@@ -270,17 +270,19 @@ namespace Leblebi
                                     }
                                     else if (OtherESP)
                                     {
-                                        //if (v_selEntityAlive.IsDead())
-                                        //    continue;
-
                                         DrawColor = Color.yellow;
                                     }
                                     else
                                         continue;
                                 }
                             }
+                            else if (OtherESP)
+                            {
+                                DrawColor = Color.white;
+                            }
+                            else
+                                continue;
 
-                            
                             GUI.Label(new Rect(v_vec3ScrEPos.x - Width / 2, v_vec3ScrEHeadPos.y - 40, 300, 20), Distance.ToString());
                             GUI.Label(new Rect(v_vec3ScrEPos.x - Width / 2, v_vec3ScrEHeadPos.y - 20, 300, 20), v_selEntity.LocalizedEntityName);
                             GUIDrawer.DrawLine(new Vector2(Screen.width / 2.0f, Screen.height), new Vector2(v_vec3ScrEPos.x, v_vec3ScrEPos.y), DrawColor, 2.5f);
